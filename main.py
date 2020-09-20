@@ -4,7 +4,7 @@ import os
 from core.lawn import Lawn
 
 
-DEFAULT_FILE = os.path.join(os.path.dirname(__file__), 'data/default.txt')
+DEFAULT_FILE = os.path.join(os.path.dirname(__file__), 'input/default.txt')
 
 def paired(iterable):
     """
@@ -12,6 +12,7 @@ def paired(iterable):
     ex: paired([a, b, c, d]) -> [(a, b), (b, c)]
 
     :param: iterable
+    :return collection of tuple of str (zip)
     """
     return zip(*[iter(iterable)] * 2)
 
@@ -21,6 +22,8 @@ def start(file_path):
     read the input file, instantiate the lawn and run every mower simulations
 
     :param: iterable
+
+    :return: None
     """
     file = open(file_path, "r")
     #The first line of the file contain the rigth  upper corner of the lawn at the format "x y"
@@ -37,11 +40,7 @@ def start(file_path):
     print(lawn.mowers_positions()) #We print the final position of each mower
 
 
-
-
-
 if __name__ == '__main__':
-
     if len(sys.argv) == 1:  #If no specific file_path are in argument
         start(DEFAULT_FILE) #we use the defaul file
     else:

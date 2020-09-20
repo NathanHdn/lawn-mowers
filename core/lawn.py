@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
-
-
 from threading import Thread
 
 from .dimensions import Dimensions
+
 from .mower import Mower
 
 
@@ -14,8 +12,8 @@ class Lawn:
     divided into a grid to simplify navigation
 
     Args:
-         bottom_left_corner (tuple of int): coordinates (x, y) of the cell at
-                                           the bottom left corner of the grid
+         right_upper_corner (tuple of int): coordinates (x, y) of the cell at
+                                           the upper right corner of the grid
 
     Attributes:
         dim (Dimensions Object): The dimensions the grid
@@ -35,37 +33,33 @@ class Lawn:
         self.mowers: list[Mower] = list()
         self.mowing_list: list[Thread] = list()
 
-
-
-
-    def availlable(self, coordinates: (int, int)) -> bool:
+    def available(self, coordinates: (int, int)) -> bool:
         """
         return if the cell at the coordinate in argument is availlable
 
         :param: coordinates (tuple of int)
 
-        :return: is_availlable (bool)
+        :return: position is available (bool)
        """
         if self.dim.include(coordinates):
-            return coordinates not in [ m.coor for m in self.mowers ]
+            return coordinates not in [m.coordinates for m in self.mowers]
 
-
-
-    def start_mowing(self, start_coor: (int, int), orientation: str, instructions: str):
+    def start_mowing(self, start_coordinates: (int, int), orientation: str, instructions: str):
         """
         Initialize a Mower Object on lawn at the start position
         then executate then mow following the instruction
 
         :param:
-            start_coor (tuple of int) coordinates of the start position of the mower
+            start_coordinates (tuple of int) coordinates of the start position of the mower
             orientation (char): Orientation of the mower (cardinal point)
                                 possible values : 'N', 'E', 'W', 'S'
-            instructions (str): list of mover's instrucitions
+            instructions (str): list of mover's instructions
 
         :return: None
         """
+
         def execute(instructions: str, mower: Mower):
-            #Excecute all the mower's instrcution
+            # Execute all the mower's instructions
             for instruction in instructions:
                 instruction.upper()  # ignore case
                 if instruction == 'L':
@@ -74,20 +68,19 @@ class Lawn:
                     mower.rotate_right()
                 elif instruction == 'F':
                     destination = mower.front_coordinates()
-                    if self.availlable(destination):
+                    if self.available(destination):
                         mower.move(destination)
 
-        if self.availlable(start_coor):
-            mower = Mower(start_coor, orientation)
+        if self.available(start_coordinates):
+            mower = Mower(start_coordinates, orientation)
             self.mowers.append(mower)
             mowing = Thread(target=execute, args=(instructions, mower))
             self.mowing_list.append(mowing)
             mowing.start()
 
-
     def wait_mowing_end(self):
         """
-        Wait until the end of all the mowing proccess
+        Wait until the end of all the mowing process
         that are currently happening.
 
         :param:: None
@@ -97,7 +90,6 @@ class Lawn:
         for thread in self.mowing_list:  # We wait the end of all mowing
             thread.join()
         self.mowing_list.clear()
-
 
     def mowers_positions(self):
         """

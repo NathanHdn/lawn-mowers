@@ -1,5 +1,4 @@
-from . import dimensions
-from . import lawn
-from . import mower
-from . import orientation
-import core
+from .dimensions import Dimensions
+from .lawn import Lawn
+from .mower import Mower
+from .orientation import Orientation

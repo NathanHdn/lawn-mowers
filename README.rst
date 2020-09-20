@@ -13,8 +13,6 @@ Technical informations:
     - IDE: PyCharm 2019.1.3
 
 
-Note: Applying for a  position requiring a great proficiency in Python, the choice of this language for the project seemed to be the most relevant.
-
 
 ---------------
 
@@ -56,6 +54,6 @@ Files description
 #################
 
 
-All the developement is located in the folder : lawn-mower/core
+All the developement is located in the folder /core
 
-All the tests are located in the folder : lawn-mowe/tests
+All the tests are located in the folder /tests

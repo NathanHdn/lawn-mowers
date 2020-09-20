@@ -2,7 +2,7 @@
 
 from .orientation import Orientation
 
-class Mower() :
+class Mower():
     """
     The Mower object contain its coordinates on the lawn grid
     and its orientation (cardinal point).
@@ -15,18 +15,14 @@ class Mower() :
                             -> accepted values : {'N', 'E', 'S', 'W'}
 
     Attributes:
-        coor (tuple of int): x and y coordinates of the Mower on the lawn, format: (int, int)
-        orient(Orientation): Orientation of the Mower
+        coordinates (tuple of int): x and y coordinates of the Mower on the lawn, format: (int, int)
+        orientation(Orientation): Orientation of the Mower
 
     """
 
-
-    def __init__(self, coordinates: (int, int), orientation: chr):
-        self.coor: (int, int) = coordinates
-        self.orient: Orientation = Orientation(orientation)
-
-
-
+    def __init__(self, coordinates: (int, int), orientation: str):
+        self.coordinates: (int, int) = coordinates
+        self.orientation: Orientation = Orientation(orientation)
 
     def rotate_left(self):
         """
@@ -36,8 +32,7 @@ class Mower() :
 
         :return: None
         """
-        self.orient.rotate_left()
-
+        self.orientation.rotate_left()
 
     def rotate_right(self):
         """
@@ -47,10 +42,9 @@ class Mower() :
 
         :return: None
         """
-        self.orient.rotate_right()
+        self.orientation.rotate_right()
 
-
-    def move(self, coor):
+    def move(self, coordinates):
         """
         Move forward the coordinate
 
@@ -58,8 +52,7 @@ class Mower() :
 
         :return: None
         """
-        self.coor = coor
-
+        self.coordinates = coordinates
 
     def front_coordinates(self)-> (int, int):
         """
@@ -69,20 +62,17 @@ class Mower() :
 
         :return: coordinates of the front cell (tuple of int)
         """
-        x = self.coor[0]
-        y = self.coor[1]
-        if self.orient.is_north():
+        x = self.coordinates[0]
+        y = self.coordinates[1]
+        if self.orientation.is_north():
             y += 1
-        elif self.orient.is_east():
+        elif self.orientation.is_east():
             x += 1
-        elif self.orient.is_south():
+        elif self.orientation.is_south():
             y -= 1
-        elif self.orient.is_west():
+        elif self.orientation.is_west():
             x -= 1
-        return (x, y)
-
-
-
+        return x, y
 
     def to_str(self) -> str:
         """
@@ -93,7 +83,7 @@ class Mower() :
 
         :return: the position in a string format, ex: "1 3 N"
         """
-        return str(self.coor[0]) + ' ' + \
-               str(self.coor[1]) + ' ' + \
-               self.orient.to_char()
+        return str(self.coordinates[0]) + ' ' + \
+               str(self.coordinates[1]) + ' ' + \
+               self.orientation.to_char()
 

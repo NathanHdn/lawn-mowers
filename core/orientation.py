@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
-
 CARDINALS = "NESW"
+
 
 class Orientation:
     """
@@ -20,14 +19,10 @@ class Orientation:
     """
 
     def __init__(self, cardinal_letter: str):
-        cardinal_letter.upper() #ignore case
+        cardinal_letter.upper() # ignore case
         if cardinal_letter not in CARDINALS:
             raise ValueError("Not a cardinal point, accepted values : {'N", 'E', 'S', 'W')
         self.value: int = CARDINALS.index(cardinal_letter)
-
-
-
-
 
     def rotate_right(self):
         """
@@ -37,9 +32,7 @@ class Orientation:
 
         :return: None
         """
-
         self.value = (self.value + 1) % 4
-
 
     def rotate_left(self):
         """
@@ -49,9 +42,7 @@ class Orientation:
 
         :return: None
         """
-
         self.value = (self.value - 1) % 4
-
 
     def to_char(self) -> str:
         """
@@ -62,9 +53,7 @@ class Orientation:
 
         :return: char: the first letter name of the current orientation. (Uppercase)
         """
-
         return CARDINALS[self.value]
-
 
     def is_north(self) -> bool:
         """
@@ -74,7 +63,6 @@ class Orientation:
 
         :return: bool: if the current orientation is at the north
         """
-
         return self.value == 0
 
 
@@ -86,9 +74,7 @@ class Orientation:
 
         :return: bool: if the current orientation is at the east
         """
-
         return self.value == 1
-
 
     def is_south(self) -> bool:
         """
@@ -98,9 +84,7 @@ class Orientation:
 
         :return: bool: if the current orientation is at the south
         """
-
         return self.value == 2
-
 
     def is_west(self) -> bool:
         """
@@ -110,5 +94,4 @@ class Orientation:
 
         :return: bool: if the current orientation is at the west
         """
-
         return self.value == 3

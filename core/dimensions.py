@@ -19,10 +19,10 @@ class Dimensions():
 
     """
 
+
+
     def __init__(self, bottom_left: (int, int), right_upper: (int, int)):
-        # Checking if the right upper corner is at the right and at
-        # the right and at the top of the bottom left corner
-        if right_upper[0] < bottom_left[0] or right_upper[1] < bottom_left[1]:
+        if right_upper[0] < bottom_left[0] or right_upper[1] < bottom_left[1]:            # Checking if the right upper corner is at the right and at the right and at the top of the bottom left corner
             raise ValueError("Invalid corners position")
         self.x_max = right_upper[0]
         self.y_max = right_upper[1]
@@ -40,6 +40,5 @@ class Dimensions():
 
         Return: (bool) : if the coordinates is on the grid limit
         """
-
         return self.x_min <= coordinates[0] <= self.x_max and \
                self.y_min <= coordinates[1] <= self.y_max
