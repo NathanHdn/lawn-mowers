@@ -43,9 +43,12 @@ Run & Test
 
         python3  main.py      ['file_path']
 
-- Run tests :
+- Run all tests :
 
     nosetests tests
+
+- Run a specific test class
+    nosetests tests/['test_file_name']
 
 
 ---------------
