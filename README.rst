@@ -35,7 +35,7 @@ Run & Test
 
 
 
--  Run the program with the default file with the command:
+-  Run the program with the default file:
 
         python3   main.py
 
