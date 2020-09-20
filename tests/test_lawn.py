@@ -55,8 +55,6 @@ class TestLawn(unittest.TestCase):
         l.wait_mowing_end()
         # verify if the last move (go forward) have been excecuted
         self.assertEqual(l.mowers_positions(), "0 1 W")
-d
-
 
 
 if __name__ == '__main__':
