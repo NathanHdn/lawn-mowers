@@ -48,7 +48,8 @@ Run & Test
     nosetests tests
 
 - Run a specific test class
-    nosetests tests/['test_file_name']
+
+    nosetests tests/['test_file_name'].py
 
 
 ---------------
