@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+
 from core.orientation import Orientation
 
+
+
+
 class TestOrientation(unittest.TestCase):
+    """
+    Test the core.orientation.Orientation cless
+    """
+
+
     def test_init(self):
         """
-        Test the instansation of an Oirentation object
+        Test the instansation of an Orientation object
         """
         o = Orientation('S')
         self.assertTrue(o.is_south())
@@ -31,6 +40,7 @@ class TestOrientation(unittest.TestCase):
         o.rotate_left()
         self.assertTrue(o.is_west())
 
+
     def test_right_rotation(self):
         """
         Test the right rotation method
@@ -38,6 +48,7 @@ class TestOrientation(unittest.TestCase):
         o = Orientation('N')
         o.rotate_right()
         self.assertTrue(o.is_east())
+
 
     def test_to_char(self):
         """

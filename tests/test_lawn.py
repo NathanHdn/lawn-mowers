@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+
 from core.lawn import Lawn
+
 
 class TestLawn(unittest.TestCase):
     """
-    Test of the main.Mower class
+    Test of the core.lawn.Lawn class
     """
-    def test_availlable(self):
+    def test_available(self):
         """
         Test Lawn.availlable()
         """
         l = Lawn((2, 2))
-        l.start_mowing((1, 1), "N", "") #A mower in now on the lawn at (1, 1)
-        self.assertFalse(l.availlable((1,1)))
-        self.assertTrue(l.availlable((2, 1)))
-        self.assertFalse(l.availlable((3, 1))) #outside the lawn
-
+        # Set a mower on the lawn at (1, 1)
+        l.start_mowing((1, 1), "N", "")
+        self.assertFalse(l.available((1, 1)))
+        self.assertTrue(l.available((2, 1)))
+        self.assertFalse(l.available((3, 1)))
 
     def test_mowers_positions(self):
         """
@@ -26,10 +28,9 @@ class TestLawn(unittest.TestCase):
         l.start_mowing((1, 1), 'W', "")
         self.assertEqual(l.mowers_positions(), "1 1 W")
 
-
     def test_start_mowing(self):
         """
-        Test the start_mowing()
+        Test the Lawn.start_mowing() method
 
         """
         l = Lawn((5, 5))
@@ -41,15 +42,20 @@ class TestLawn(unittest.TestCase):
 
     def test_wait_mowing_end(self):
         """
-        Test Mower.get_coor() method
-        Note: very long
+        Test Lawn.wait_mowing() method
+
         """
         l = Lawn((2,2))
-        instructions = "RL" * pow(10,6) + 'F' #We do right<->left one million times and then go forward
+        # do right<->left moves one million times and then go forward
+        instructions = "RL" * pow(10,6) + 'F'
         l.start_mowing((1,1), 'W', instructions)
-        self.assertEqual(l.mowers_positions()[:3], "1 1")#the instruction are still processing we don't if the orientation is W or E
-        l.wait_mowing_end() #we admit that the comper won't have finish to proccess 2 million instructions
+        # check if the right<->left moves are still processing
+        self.assertTrue(l.mowers_positions().startswith("1 1"))
+        # wait the end of all instructions
+        l.wait_mowing_end()
+        # verify if the last move (go forward) have been excecuted
         self.assertEqual(l.mowers_positions(), "0 1 W")
+d
 
 
 

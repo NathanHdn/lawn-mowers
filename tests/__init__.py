@@ -1,7 +1,7 @@
-from . import test_dimensions
-from . import test_lawn
-from . import test_mower
-from . import test_orientation
-
+from .test_dimensions import TestDimensions
+from .test_lawn import TestLawn
+from .test_orientation import TestOrientation
+from .test_mower import TestMower
+from core import *
 
 
